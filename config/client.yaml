@@ -16,7 +16,7 @@ client:
   sendDelay: 3            # time in seconds to delay the resend try
 
 server:                   # only used if useBroadcast = no
-  ip:   127.0.0.1
+  ip: 127.0.0.1           # use service name if you are running docker
   port: 8080
 
 inputSource:

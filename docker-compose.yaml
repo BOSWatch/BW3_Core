@@ -1,0 +1,14 @@
+version: '3'
+services:
+  client:
+    build:
+      dockerfile: docker/dockerfiles/Client.Dockerfile
+      context: .
+    command: python /opt/boswatch/bw_client.py -c client.yaml
+    devices:
+      - "/dev/bus/usb"
+  server:
+    build:
+      dockerfile: docker/dockerfiles/Server.Dockerfile
+      context: .
+    command: python /opt/boswatch/bw_server.py -c server.yaml
