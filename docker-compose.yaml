@@ -12,3 +12,4 @@ services:
       dockerfile: docker/dockerfiles/Server.Dockerfile
       context: .
     command: python /opt/boswatch/bw_server.py -c server.yaml
+
