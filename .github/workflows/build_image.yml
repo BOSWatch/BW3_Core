@@ -20,4 +20,4 @@ jobs:
         GH_PACKAGES_PASSWORD: ${{ secrets.GH_PACKAGES_PASSWORD }}
       run: docker login docker.pkg.github.com --username $GH_PACKAGES_USERNAME --password $GH_PACKAGES_PASSWORD
     - name: Push the Docker image to Github Packages
-      run: docker tag boswatch docker.pkg.github.com/janspeller/BW3-Core/boswatch:latest
+      run: docker tag boswatch docker.pkg.github.com/janspeller/bw3-core/boswatch:latest
