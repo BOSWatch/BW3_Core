@@ -2,7 +2,7 @@ name: Build Docker Image
 
 on:
   push:
-    branches: [ master, feature/docker ]
+    branches: [ master ]
 
 jobs:
 
@@ -22,4 +22,4 @@ jobs:
     - name: Rename the Docker image
       run: docker tag boswatch docker.pkg.github.com/janspeller/bw3-core/boswatch:latest
     - name: Push the Docker image to Github package repository
-      run: docker push docker.pkg.github.com/janspeller/bw3-core/boswatch:latest
+      run: docker push docker.pkg.github.com/BOSWatch/bw3-core/boswatch:latest
