@@ -15,6 +15,9 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag boswatch:$(date +%s)
     - name: docker login
-      run: docker login docker.pkg.github.com --username janspeller
+      env:
+        GH_PACKAGES_USERNAME: ${{ secrets.GH_PACKAGES_USERNAME }}
+        GH_PACKAGES_PASSWORD: ${{ secrets.GH_PACKAGES_PASSWORD }}
+      run: docker login docker.pkg.github.com --username $GH_PACKAGES_USERNAME --password $GH_PACKAGES_PASSWORD
     - name: Push the Docker image to Github Packages
       run: docker tag boswatch docker.pkg.github.com/janspeller/BW3-Core/boswatch:latest
