@@ -43,7 +43,7 @@ Vereinfacht kann man sagen, dass einzelnen Router ODER-verknüpft und die jeweil
   config:
     - name: "Zvei filter"
       checks:
-        - field: zvei
+        - field: tone
           regex: "65[0-9]{3}"  # all zvei with starting 65
     - name: "FMS Stat 3"
       checks:

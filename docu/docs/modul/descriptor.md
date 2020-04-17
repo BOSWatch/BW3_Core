@@ -34,7 +34,7 @@ Informationen zum Aufbau eines [BOSWatch Pakets](../develop/packet.md)
 - type: module
   res: descriptor
   config:
-    - scanField: zvei
+    - scanField: tone
       descrField: description
       wildcard: "{DESCR}"
       descriptions:
