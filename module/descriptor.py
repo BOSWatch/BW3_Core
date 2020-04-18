@@ -42,10 +42,10 @@ class BoswatchModule(ModuleBase):
 
         @param bwPacket: A BOSWatch packet instance"""
         for descriptor in self.config:
+            if not bwPacket.get(descriptor.get("scanField")):
+                break  # scanField is not available in this packet
+            bwPacket.set(descriptor.get("descrField"), bwPacket.get(descriptor.get("scanField")))
             for description in descriptor.get("descriptions"):
-                if not bwPacket.get(descriptor.get("scanField")):
-                    break  # scanField is not available in this packet
-                bwPacket.set(descriptor.get("descrField"), description.get("for"))
                 if str(description.get("for")) == bwPacket.get(descriptor.get("scanField")):
                     logging.debug("Description '%s' added in packet field '%s'",
                                   description.get("add"), descriptor.get("descrField"))

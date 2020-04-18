@@ -30,3 +30,12 @@ list1:
     - two
     - three
   - string1
+
+descriptor_test:
+  - scanField: tone
+    descrField: description
+    descriptions:
+      - for: 12345
+        add: Test 12345
+      - for: 23456
+        add: Test 23456
