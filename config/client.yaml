@@ -9,7 +9,7 @@
 
 client:
   name: BW3 Client        # name of the BW3 Client instance
-  inputSource: sdr        # atm only 'sdr' is possible
+  inputSource: sdr        # name of the input source('sdr' or 'lineIn')
   useBroadcast: no        # use broadcast to find server automatically
   reconnectDelay: 3       # time in seconds to delay reconnect try
   sendTries: 3            # how often should tried to send a packet
@@ -27,6 +27,10 @@ inputSource:
     squelch: 1
     gain: 100
     rtlPath: /opt/rtl_sdr/rtl_fm
+    mmPath: /opt/multimon/multimon-ng
+  lineIn:
+    card: 1
+    device: 0
     mmPath: /opt/multimon/multimon-ng
 
 decoder:

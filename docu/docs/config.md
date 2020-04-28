@@ -11,7 +11,7 @@ zwingend in die Konfiguration eingetragen werden.
 |Feld|Beschreibung|Default|
 |----|------------|-------|
 |name|Name zur Identifizierung der Client Instanz||
-|inputSource|Art der zu nutzenden Input Quelle (aktuell nur `sdr`)|sdr|
+|inputSource|Art der zu nutzenden Input Quelle (`sdr` oder `lineIn`)||
 |useBroadcast|Verbindungsdaten per [Broadcast](information/broadcast.md) beziehen|no|
 |reconnectDelay|Verzögerung für erneuten Verbindungsversuch zum Server|3|
 |sendTries|Anzahl der Sendeversuche eines Pakets|3|
@@ -36,7 +36,7 @@ server:
 
 ---
 ### `inputSource:`
-Aktuell gibt es nur `sdr:` als Input Quelle
+Es gibt die Auswahl zwischen `sdr` oder `lineIn` als Input Quelle
 
 #### `sdr:`
 |Feld|Beschreibung|Default|
@@ -59,6 +59,54 @@ inputSource:
     squelch: 1
     gain: 100
     rtlPath: /usr/bin/rtl-fm
+    mmPath: /opt/multimon/multimon-ng
+```
+
+#### `lineIn:`
+|Feld|Beschreibung|Default|
+|----|------------|-------|
+|device|die device Id der Soundkarte|1|
+|mmPath|Pfad zur multimon-ng Binary|multimon-ng|
+
+**Device herausfinden**
+Durch eingabe des Befehls `aplay -l` werden alle Soundkarten ausgegeben. Das schaut ungefähr so aus:
+```console
+**** List of PLAYBACK Hardware Devices ****
+card 0: ALSA [bcm2835 ALSA], device 0: bcm2835 ALSA [bcm2835 ALSA]
+  Subdevices: 7/7
+  Subdevice #0: subdevice #0
+  Subdevice #1: subdevice #1
+  Subdevice #2: subdevice #2
+  Subdevice #3: subdevice #3
+  Subdevice #4: subdevice #4
+  Subdevice #5: subdevice #5
+  Subdevice #6: subdevice #6
+card 0: ALSA [bcm2835 ALSA], device 1: bcm2835 IEC958/HDMI [bcm2835 IEC958/HDMI]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 0: ALSA [bcm2835 ALSA], device 2: bcm2835 IEC958/HDMI1 [bcm2835 IEC958/HDMI1]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 1: Device [C-Media USB Audio Device], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+```
+
+Wir betrachten das letzte Gerät: `card 1: Device [C-Media USB Audio Device], device 0: USB Audio [USB Audio]`
+
+In dem Fall ist das letzte Gerät - `card 1` - unsere USB-Audio Schnittstelle die wir verwenden wollen.
+In der Konfiguration wird das Feld `card` nun auf den Wert 1 gesetzt.
+
+Nach dem Typ der Soundkarte steht das device, in diesem Fall `device 0`.
+In der Konfiguration wird das Feld `device` nun auf den Wert 0 gesetzt.
+
+**Beispiel:**
+```yaml
+inputSource:
+  ...
+  lineIn:
+    card: 1
+    device: 0
     mmPath: /opt/multimon/multimon-ng
 ```
 
