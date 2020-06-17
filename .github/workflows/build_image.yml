@@ -1,0 +1,25 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag boswatch:latest
+    - name: docker login
+      env:
+        GH_PACKAGES_USERNAME: ${{ secrets.GH_PACKAGES_USERNAME }}
+        GH_PACKAGES_PASSWORD: ${{ secrets.GH_PACKAGES_PASSWORD }}
+      run: docker login docker.pkg.github.com --username $GH_PACKAGES_USERNAME --password $GH_PACKAGES_PASSWORD
+    - name: Rename the Docker image
+      run: docker tag boswatch docker.pkg.github.com/janspeller/bw3-core/boswatch:latest
+    - name: Push the Docker image to Github package repository
+      run: docker push docker.pkg.github.com/BOSWatch/bw3-core/boswatch:latest

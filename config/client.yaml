@@ -16,7 +16,7 @@ client:
   sendDelay: 3            # time in seconds to delay the resend try
 
 server:                   # only used if useBroadcast = no
-  ip:   127.0.0.1
+  ip: 127.0.0.1           # use service name if you are running docker
   port: 8080
 
 inputSource:
@@ -26,7 +26,7 @@ inputSource:
     error: 0
     squelch: 1
     gain: 100
-    rtlPath: /usr/bin/rtl_fm
+    rtlPath: /opt/rtl_sdr/rtl_fm
     mmPath: /opt/multimon/multimon-ng
   lineIn:
     card: 1
