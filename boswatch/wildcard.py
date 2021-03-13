@@ -97,8 +97,9 @@ def replaceWildcards(message, bwPacket):
         if field is not None:
             message = message.replace(wildcard, field)
 
-    for wildcard, field in _additionalWildcards.items():
+    for wildcard, fieldName in _additionalWildcards.items():
+        field = bwPacket.get(fieldName)
         if field is not None:
-            message = message.replace(wildcard, bwPacket.get(field))
+            message = message.replace(wildcard, field)
 
     return message
