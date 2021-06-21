@@ -134,3 +134,22 @@ ZVEI1: 135
 #in case of a double-tone for siren n-'D's are sended
 # ZVEI1: DDD
 # ZVEI1: DDDDD
+
+# [multicast]
+# this part test the multicast module
+POCSAG1200: Address: 2145000  Function: 2  Alpha:   alarm ric  #not in multicast regex filter
+## you are required to define: 
+#      multicastAlarm_textRics: 2100002,210001
+#      multicastAlarm_ignore_time: 10 
+#      multicastAlarm_delimiterRic: 2100003
+#      multicastAlarm_delimiterSubric: 0
+# @ your server.yaml
+## Function corresponds to subric here
+POCSAG1200: Address: 2100003  Function: 0  Alpha:   delimiter
+POCSAG1200: Address: 2100000  Function: 1  Alpha:   alarm ric
+POCSAG1200: Address: 2100002  Function: 2  Alpha:   text ric says: fire in the hole
+POCSAG1200: Address: 2100003  Function: 0  Alpha:   delimiter
+POCSAG1200: Address: 2100003  Function: 0  Alpha:   delimiter
+POCSAG1200: Address: 2100000  Function: 1  Alpha:   alarm ric
+POCSAG1200: Address: 2100002  Function: 2  Alpha:   text ric says: again fire in the hole
+POCSAG1200: Address: 2100003  Function: 0  Alpha:   delimiter

@@ -13,18 +13,32 @@ server:
   useBroadcast: no        # serve server ip on broadcast request
 
 alarmRouter:
-- Router 1
+- Alarm_multicast
 
 router:
-- name: Router 1
+- name: Alarm_multicast
   route:
   - type: module
-    res: filter.modeFilter
-    name: Filter Fms/Zvei
+    res: filter.regexFilter
     config:
-      allowed:
-        - fms
-        - zvei
-  - type: plugin
-    name: test plugin
-    res: template_plugin
+      - name: "valid multicast rics"
+        checks:
+          - field: ric 
+            regex: 210000|210002|210003
+  - type: module
+    res: filter.doubleFilter
+    name: Filter double
+    config:
+      ignoreTime: 10
+      maxEntry: 10
+      pocsagFields:
+       - ric 
+       - subric
+  - type: module
+    res: multicast
+    name: Find the multicast message infos
+    config:
+      multicastAlarm_textRics: 2100002,210001
+      multicastAlarm_ignore_time: 10 
+      multicastAlarm_delimiterRic: 2100003
+      multicastAlarm_delimiterSubric: 0
